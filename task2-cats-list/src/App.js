@@ -19,6 +19,10 @@ class App extends Component {
   };
 
   render() {
+    const { cats, searchField } = this.state;
+    const filteredCats = cats.filter(cats =>
+      cats.name.toLowerCase().includes(searchField.toLowerCase())
+    );
     return (
       <div className="App">
         <h1>Cats List</h1>
@@ -29,7 +33,7 @@ class App extends Component {
           onChange={this.onSearchChange}
         />
         <div className="card-list">
-          {this.state.cats.map(cats => (
+          {filteredCats.map(cats => (
             <div className="card-container" key={cats.id}>
               <img
                 alt="cat"
