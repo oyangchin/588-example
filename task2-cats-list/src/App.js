@@ -14,11 +14,20 @@ class App extends Component {
       .catch();
   }
 
+  onSearchChange = event => {
+    this.setState({ searchField: event.target.value });
+  };
+
   render() {
     return (
       <div className="App">
         <h1>Cats List</h1>
-        <input className="search-box" type="search" placeholder="search cats" />
+        <input
+          className="search-box"
+          type="search"
+          placeholder="search cats"
+          onChange={this.onSearchChange}
+        />
         <div className="card-list">
           {this.state.cats.map(cats => (
             <div className="card-container" key={cats.id}>
