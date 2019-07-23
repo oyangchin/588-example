@@ -2,22 +2,34 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+  state = {
+    cats: [],
+    searchField: ''
+  };
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(cats => this.setState({ cats: cats }))
+      .catch();
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Cats List</h1>
         <input className="search-box" type="search" placeholder="search cats" />
         <div className="card-list">
-          <div className="card-container">
-            <img alt="cat" src="https://robohash.org/6?set=set4&size=180x180" />
-            <h2> Mrs. Dennis Schulist </h2>
-            <p> Karley_Dach@jasper.info </p>
-          </div>
-          <div className="card-container">
-            <img alt="cat" src="https://robohash.org/4?set=set4&size=180x180" />
-            <h2> Patricia Lebsack </h2>
-            <p> Julianne.OConner@kory.org </p>
-          </div>
+          {this.state.cats.map(cats => (
+            <div className="card-container" key={cats.id}>
+              <img
+                alt="cat"
+                src={`https://robohash.org/${cats.id}?set=set4&size=180x180`}
+              />
+              <h2> {cats.name} </h2>
+              <p> {cats.email}</p>
+            </div>
+          ))}
         </div>
       </div>
     );
