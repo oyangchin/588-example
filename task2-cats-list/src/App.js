@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { Searchbox } from './card/search-box';
-
+import { CardList } from './card/card-list';
 class App extends Component {
   state = {
     cats: [],
@@ -29,18 +29,7 @@ class App extends Component {
       <div className="App">
         <h1>Cats List</h1>
         <Searchbox onSearchChange={this.onSearchChange} />
-        <div className="card-list">
-          {filteredCats.map(cats => (
-            <div className="card-container" key={cats.id}>
-              <img
-                alt="cat"
-                src={`https://robohash.org/${cats.id}?set=set4&size=180x180`}
-              />
-              <h2> {cats.name} </h2>
-              <p> {cats.email}</p>
-            </div>
-          ))}
-        </div>
+        <CardList Cats={filteredCats} />
       </div>
     );
   }
